@@ -1,0 +1,63 @@
+﻿@model Article
+
+@{
+	ViewData["Title"] = "Create Article (avec Contraintes)";
+}
+
+
+
+@section Scripts
+{
+	<partial name="_ValidationScriptsPartial" />
+}
+
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Create">
+	<br />
+	<div>
+
+		<label asp-for="Theme">Theme :</label>
+		<input asp-for="Theme" />
+		<span asp-validation-for="Theme"></span>
+		<div id="divContentMessageTheme"></div>
+
+	</div>
+	<br />
+	<div>
+
+		<label asp-for="Auteur">Auteur :</label>
+		<input asp-for="Auteur" />
+		<span asp-validation-for="Auteur"></span>
+		<div id="divContentMessageAuteur"></div>
+
+	</div>
+	<br />
+	<div>
+		<label asp-for="Contenu">Contenu :</label>
+		<input asp-for="Contenu" />
+		<span asp-validation-for="Contenu"></span>
+
+	</div>
+	<br />
+	<div asp-validation-summary="All"></div>
+	<br />
+	<button>Valider</button>
+
+</form>
+
+<script>
+	$(function () {
+		$('#formSearch').submit(function (e) {
+			$.post('/Article/IsThemeUnique', { name: $('#Theme').val() }, function (data) {
+				$('#divContentMessageTheme').html(data);
+			});
+			e.preventDefault();
+		});
+
+	});
+
+
+
+</script>

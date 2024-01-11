@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Article>
+
+<p class="text-success">@TempData["Message"] </p>
+
+<h1>Liste des Articles :</h1>
+
+<div>
+	Recherche en ajax
+	<form asp-action="Search" id="formSearch">
+		<input name="name" id="searchName" placeholder="Nom..." />
+		<button>Rechercher</button>
+	</form>
+</div>
+
+
+
+<div id="divContentMessages">
+	<partial name="_displayArticlesPartial" model="Model" />
+</div>
+
+
+<a asp-action="Create">Ajouter</a>
+
+<script>
+
+
+	$(function () {
+		$('#formSearch').submit(function (e) {
+			$.post('/Article/SearchAjax', { name: $('#searchName').val() }, function (data) {
+				$('#divContentMessages').html(data);
+			});
+
+			e.preventDefault();
+		});
+
+	})
+
+
+</script>
+

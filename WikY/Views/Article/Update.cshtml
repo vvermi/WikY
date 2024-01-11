@@ -1,0 +1,13 @@
+﻿@model Article
+
+<form asp-action="Update">
+    <input asp-for="Id" type="hidden" />
+    <label>Theme :</label>
+    <input asp-for="Theme" type="text" placeholder="@Model.Theme"/>
+    <label>Auteur :</label>
+    <input asp-for="Auteur" type="text" />
+    <label>Contenu :</label>
+    <input asp-for="Contenu" type="text" />
+    
+    <button>Modifier</button>
+</form>
