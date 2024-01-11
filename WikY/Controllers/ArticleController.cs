@@ -32,7 +32,7 @@ namespace WikY.Controllers
 
 		public IActionResult AllArticles()
 		{
-			return View(_articleBusiness.GetArticles());
+			return View(_articleBusiness.GetArticles().Result);
 		}
 
 		public IActionResult Create()
@@ -83,7 +83,7 @@ namespace WikY.Controllers
 		{
 			bool res = false;
 
-			var truc = _articleBusiness.GetArticles().FirstOrDefault(e => e.Theme == Theme);
+			var truc = (_articleBusiness.GetArticles().Result).FirstOrDefault(e => e.Theme == Theme);
 
 			if (truc == null)
 			{

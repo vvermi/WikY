@@ -5,7 +5,7 @@ namespace Repositories.Contracts
 {
 	public interface IArticleRepository
 	{
-		List<Article> GetArticles();
+		Task<List<Article>> GetArticles();
 		void Create(Article article);
 		Article Read(int id);
 		bool Update(Article article);

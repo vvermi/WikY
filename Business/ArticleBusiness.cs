@@ -18,10 +18,9 @@ namespace Business
 			_articleRepository = ArticleRepository;
 
 		}
-		public List<Article> GetArticles()
+		public async Task<List<Article>> GetArticles()
 		{
-
-			return _articleRepository.GetArticles();
+			return await _articleRepository.GetArticles();
 		}
 		public void Create(string Theme, string Auteur, string Contenu)
 		{

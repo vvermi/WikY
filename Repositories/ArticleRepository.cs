@@ -11,9 +11,9 @@ namespace Repositories
         {
             _context = context;
         }
-        public List<Article> GetArticles()
+        public async Task<List<Article>> GetArticles()
         {
-            return _context.Articles.ToList();
+            return await _context.Articles.ToListAsync();
         }
 
         public void Create(Article article)
