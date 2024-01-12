@@ -18,43 +18,29 @@ namespace Business
 			_commentaireRepository = CommentaireRepository;
 
 		}
-		public List<Commentaire> GetCommentaires()
+		public async Task<List<Commentaire>> GetCommentaires()
 		{
 
-			return _commentaireRepository.GetCommentaires();
-		}
-		public void Create(string Theme, string Auteur, string Contenu)
-		{
-			throw new NotImplementedException();
+			return await _commentaireRepository.GetCommentaires();
 		}
 
-		public void Create(Commentaire commentaire)
+		public async Task<bool> Create(Commentaire commentaire)
 		{
-			_commentaireRepository.Create(commentaire);
+			return await _commentaireRepository.Create(commentaire);
 		}
 
-		public Commentaire Read(int id)
+		public async Task<Commentaire> Read(int id)
 		{
-			return _commentaireRepository.Read(id);
+			return await _commentaireRepository.Read(id);
 		}
 
-
-
-		public void Update(Commentaire commentaire)
+		public async Task<bool> Update(Commentaire commentaire)
 		{
-			try
-			{
-				_commentaireRepository.Update(commentaire);
-			}
-			catch (Exception Ex)
-			{
-
-				throw new Exception(Ex.Message);
-			};
+			return await _commentaireRepository.Update(commentaire);
 		}
-		public void Delete(Commentaire commentaire)
+		public async Task<bool> Delete(int id)
 		{
-			throw new NotImplementedException();
+			return await _commentaireRepository.Delete(id);
 		}
 	}
 }

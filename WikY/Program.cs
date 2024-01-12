@@ -19,7 +19,8 @@ builder.Services.AddDbContext<Context>(o =>
 
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 builder.Services.AddScoped<IArticleBusiness, ArticleBusiness>();
-
+builder.Services.AddScoped<ICommentaireRepository, CommentaireRepository>();
+builder.Services.AddScoped<ICommentaireBusiness, CommentaireBusiness>();
 
 var app = builder.Build();
 
@@ -45,7 +46,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseRedirect404();
+//app.UseRedirect404();
 
 
 app.UseAuthorization();

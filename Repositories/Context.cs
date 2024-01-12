@@ -26,7 +26,7 @@ namespace Repositories
 		{
 			var arts = new List<Article>()
 			{
-				new Article() { Id = 1, Auteur = "Lilyah", Theme = "Les Réseaux Sociaux", Contenu = "Rien", DateCre = new DateTime(2012, 01, 10) },
+				new Article() { Id = 1, Auteur = "Lilyah", Theme = "Les Réseaux Sociaux", Contenu = "Rien", DateCre = new DateTime(2012, 01, 10) , Commentaires = new List<Commentaire>()},
 				new Article() { Id = 2, Auteur = "Kezyah", Theme = "Des licornes dans les contes de fées", Contenu = "Y en a plein, c'est beau une licorne", DateCre = new DateTime(2016, 06, 04) },
 				new Article() { Id = 3, Auteur = "Wakko", Theme = "C# rocks !", Contenu = "But does it djent ?", DateCre = new DateTime(1981, 07, 10) }
 			};

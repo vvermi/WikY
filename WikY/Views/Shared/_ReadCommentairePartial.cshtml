@@ -1,0 +1,10 @@
+﻿@model Commentaire
+
+<h1>@Model.Id</h1>
+<h2>@Model.Auteur</h2>
+<h2>@Model.Contenu</h2>
+<h2>@Model.DateCre</h2>
+<h2>@Model.DateMod</h2>
+
+<a asp-controller="Commentaire" asp-action="Update" asp-route-id="@Model.Id">Modifier</a>
+<a asp-controller="Commentaire" asp-action="Delete" asp-route-id="@Model.Id" onclick="return confirm('Sûr Commentaire ???');">Supprimer</a>

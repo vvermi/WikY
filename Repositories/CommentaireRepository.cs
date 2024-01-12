@@ -1,4 +1,5 @@
 ﻿using Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
 
@@ -11,59 +12,64 @@ namespace Repositories
 		{
 			_context = context;
 		}
-		public List<Commentaire> GetCommentaires()
+		public async Task<List<Commentaire>> GetCommentaires()
 		{
-			return _context.Commentaires.ToList();
+			return await _context.Commentaires.ToListAsync();
 		}
 
-		public void Create(Commentaire commentaire)
+		public async Task<bool> Create(Commentaire commentaire)
 		{
-			_context.Commentaires.Add(commentaire);
-			_context.SaveChanges();
-		}
-
-
-
-		public Commentaire Read(int id)
-		{
-			return _context.Commentaires.FirstOrDefault(a => a.Id == id);
-		}
-
-		public bool Update(Commentaire commentaire)
-		{
-			bool ok;
 			try
 			{
-				var commentaireToEdit = _context.Commentaires.FirstOrDefault(a => a.Id == commentaire.Id);
+				_context.Commentaires.Add(commentaire);
+				await _context.SaveChangesAsync();
+				return true;
+			}
+			catch (Exception ex)
+			{
+				return false;
+			}
+		}
+
+
+
+		public async Task<Commentaire> Read(int id)
+		{
+			return await _context.Commentaires.FirstOrDefaultAsync(a => a.Id == id);
+		}
+
+		public async Task<bool> Update(Commentaire commentaire)
+		{
+			try
+			{
+				var commentaireToEdit = await _context.Commentaires.FirstOrDefaultAsync(a => a.Id == commentaire.Id);
 				commentaireToEdit.Auteur = commentaire.Auteur;
 				commentaireToEdit.Contenu = commentaire.Contenu;
 				commentaireToEdit.DateMod = DateTime.Now;
 				_context.SaveChanges();
-				ok = true;
+				return true;
 			}
 			catch (Exception ex)
 			{
-				ok = false;
-
+				return false;
 			}
-			return ok;
+
 		}
 
-		public bool Delete(int id)
+		public async Task<bool> Delete(int id)
 		{
-			bool ok;
+			bool deleted = false;
 			try
 			{
-				_context.Commentaires.Remove(_context.Commentaires.FirstOrDefault(a => a.Id == id));
-				_context.SaveChangesAsync();
-				ok = true;
+				_context.Commentaires.Remove(await _context.Commentaires.FirstOrDefaultAsync(a => a.Id == id));
+				await _context.SaveChangesAsync();
+				deleted = true;
 			}
 			catch (Exception ex)
 			{
-				ok = false;
+				deleted = false;
 			}
-			return ok;
-
+			return deleted;
 		}
 		public async Task<List<Commentaire>> Search(string name)
 		{

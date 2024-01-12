@@ -7,4 +7,16 @@
 <h2>@Model.DateMod</h2>
 
 <a asp-action="Update" asp-route-id="@Model.Id">Modifier</a>
-<a asp-action="Delete" asp-route-id="@Model.Id" onclick="return confirm('Sûr ???');">Supprimer</a>
+<a asp-action="Delete" asp-route-id="@Model.Id" onclick="return confirm('Sûr Article ???');">Supprimer</a>
+<a asp-controller="Commentaire" asp-action="Create" asp-route-id="@Model.Id">Ajouter Commentaire</a>
+
+
+<br />
+
+
+
+
+	<partial name="_DisplayCommentairesPartial" model="Model.Commentaires" />
+
+
+

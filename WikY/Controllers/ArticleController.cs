@@ -18,9 +18,11 @@ namespace WikY.Controllers
 		//}
 
 		private IArticleBusiness _articleBusiness;
-		public ArticleController(IArticleBusiness articleBusiness)
+		private ILogger<ArticleController> _logger;
+		public ArticleController(IArticleBusiness articleBusiness, ILogger<ArticleController> logger)
 		{
 			this._articleBusiness = articleBusiness;
+			_logger = logger;
 		}
 
 		public IActionResult Index()
@@ -29,7 +31,7 @@ namespace WikY.Controllers
 		}
 
 		public async Task<IActionResult> AllArticles()
-		{
+		{			
 			return View(await _articleBusiness.GetArticles());
 		}
 

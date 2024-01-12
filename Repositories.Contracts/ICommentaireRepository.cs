@@ -5,11 +5,11 @@ namespace Repositories.Contracts
 {
 	public interface ICommentaireRepository
 	{
-		List<Commentaire> GetCommentaires();
-		void Create(Commentaire commentaire);
-		Commentaire Read(int id);
-		bool Update(Commentaire commentaire);
-		bool Delete(int id);
+		public Task<List<Commentaire>> GetCommentaires();
+		public Task<bool> Create(Commentaire commentaire);
+		public Task<Commentaire> Read(int id);
+		public Task<bool> Update(Commentaire commentaire);
+		public Task<bool> Delete(int id);
 
 
 
