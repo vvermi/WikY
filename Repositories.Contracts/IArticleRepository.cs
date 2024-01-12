@@ -5,11 +5,11 @@ namespace Repositories.Contracts
 {
 	public interface IArticleRepository
 	{
-		List<Article> GetArticles();
-		void Create(Article article);
-		Article Read(int id);
-		bool Update(Article article);
-		bool Delete(int id);
+		Task<List<Article>> GetArticles();
+		Task<bool> Create(Article article);
+		Task<Article> Read(int id);
+		Task<bool> Update(Article article);
+		Task<bool> Delete(int id);
 
 
 

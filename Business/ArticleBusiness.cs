@@ -18,33 +18,26 @@ namespace Business
 			_articleRepository = ArticleRepository;
 
 		}
-		public List<Article> GetArticles()
+		public async Task<List<Article>> GetArticles()
 		{
-
-			return _articleRepository.GetArticles();
+			return await _articleRepository.GetArticles();
 		}
-		public void Create(string Theme, string Auteur, string Contenu)
+		
+		public async Task Create(Article article)
 		{
-			throw new NotImplementedException();
-		}
-
-		public void Create(Article article)
-		{
-			_articleRepository.Create(article);
+			await _articleRepository.Create(article);
 		}
 
-		public Article Read(int id)
+		public async Task<Article> Read(int id)
 		{
-			return _articleRepository.Read(id);
+			return await _articleRepository.Read(id);
 		}
 
-
-
-		public void Update(Article article)
+		public async Task Update(Article article)
 		{
 			try
 			{
-				_articleRepository.Update(article);
+				await _articleRepository.Update(article);
 			}
 			catch (Exception Ex)
 			{
@@ -52,11 +45,11 @@ namespace Business
 				throw new Exception(Ex.Message);
 			};
 		}
-		public void Delete(int id)
+		public async Task Delete(int id)
 		{
 			try
 			{
-				_articleRepository.Delete(id);
+				await _articleRepository.Delete(id);
 			}
 			catch (Exception Ex)
 			{
