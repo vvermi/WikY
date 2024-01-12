@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WikY.Models;
 
 namespace WikY.Controllers
 {
