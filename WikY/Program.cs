@@ -12,7 +12,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<Context>(o =>
 {
-
     //o.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=WikY_DB;Trusted_Connection = True; ");
     o.UseSqlServer(builder.Configuration.GetConnectionString("WikY_DB"));
 });

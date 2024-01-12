@@ -1,0 +1,7 @@
+﻿@model Commentaire
+
+<p class="text-success">@TempData["Message"] </p>
+
+<p>Détails du Commentaire @Model.Id </p>
+
+<partial name="_ReadCommentairePartial" model="Model" />

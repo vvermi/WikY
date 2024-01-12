@@ -32,5 +32,9 @@ namespace Business
 		{
 			return await _articleRepository.Delete(id);
 		}
+		public async Task<List<Article>> Search(string str)
+		{
+			return await _articleRepository.Search(str);
+		}
 	}
 }

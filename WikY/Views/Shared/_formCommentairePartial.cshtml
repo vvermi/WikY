@@ -1,0 +1,12 @@
+﻿@model Commentaire
+
+<form asp-controller="Commentaire" asp-action="Create">
+	<input asp-for="ArticleId" type="hidden" />
+	<label>Auteur :</label>
+	<input asp-for="Auteur" type="text" placeholder="@Model.Auteur" />
+	<label>Contenu :</label>
+	<input asp-for="Contenu" type="text" placeholder="@Model.Contenu" />
+
+	<button>Ajouter</button>
+
+</form>

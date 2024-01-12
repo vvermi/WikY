@@ -6,11 +6,14 @@
 
 <div>
 	Recherche en ajax
-	<form asp-action="Search" id="formSearch">
-		<input name="name" id="searchName" placeholder="Nom..." />
+	<form id="formSearch">
+		<input name="str" id="searchStr" placeholder="Truc..." />
 		<button>Rechercher</button>
 	</form>
 </div>
+
+
+
 
 
 
@@ -26,7 +29,11 @@
 
 	$(function () {
 		$('#formSearch').submit(function (e) {
-			$.post('/Article/SearchAjax', { name: $('#searchName').val() }, function (data) {
+			$.post('/Article/SearchAjax', { str: $('#searchStr').val() }, function (data) {
+				
+				alert(data);
+				
+				
 				$('#divContentMessages').html(data);
 			});
 

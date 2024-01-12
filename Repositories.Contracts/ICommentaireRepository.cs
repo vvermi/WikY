@@ -5,7 +5,7 @@ namespace Repositories.Contracts
 {
 	public interface ICommentaireRepository
 	{
-		public Task<List<Commentaire>> GetCommentaires();
+		public Task<List<Commentaire>> AllCommentaires();
 		public Task<bool> Create(Commentaire commentaire);
 		public Task<Commentaire> Read(int id);
 		public Task<bool> Update(Commentaire commentaire);

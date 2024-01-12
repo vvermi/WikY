@@ -37,7 +37,7 @@ namespace Repositories
 		{
 			try
 			{
-				var articleToEdit = _context.Articles.FirstOrDefault(a => a.Id == article.Id);
+				var articleToEdit = await _context.Articles.FirstOrDefaultAsync(a => a.Id == article.Id);
 				articleToEdit.Auteur = article.Auteur;
 				articleToEdit.Contenu = article.Contenu;
 				articleToEdit.DateMod = DateTime.Now;
@@ -62,9 +62,13 @@ namespace Repositories
 				return false;
 			}
 		}
-		public async Task<List<Article>> Search(string name)
+		public async Task<List<Article>> Search(string str)
 		{
-			return await _context.Articles.Where(a => a.Auteur.Contains(name)).ToListAsync();
+			//return await _context.Articles.Where(a => a.Auteur.Contains(name)|| a.Theme.Contains(name)).ToListAsync();
+			return await _context.Articles
+		.Where(a => a.Auteur.Contains(str) || a.Theme.Contains(str) || a.Contenu.Contains(str) || a.Commentaires.Any(c => c.Auteur.Contains(str) || c.Contenu.Contains(str)))
+		.Include(a => a.Commentaires)
+		.ToListAsync();
 		}
 		public async Task<List<Article>> GetAllAsync()
 		{

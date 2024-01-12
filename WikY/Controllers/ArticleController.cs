@@ -43,11 +43,17 @@ namespace WikY.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(Article article)
 		{
-			await _articleBusiness.Create(article);
+			if (await _articleBusiness.Create(article))
+			{
 			TempData["Message"] = "Article créé";
+			}
+			else
+			{
+				TempData["Message"] = "Article non créé";
+			}
 
 			//return RedirectToAction("Read", new { id = article.Id });
-			return RedirectToAction("ReadAll");
+			return RedirectToAction("AllArticles");
 		}
 
 		public async Task<IActionResult> Read(int id)
@@ -64,14 +70,25 @@ namespace WikY.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Update(Article article)
 		{
-			await _articleBusiness.Update(article);
-			TempData["Message"] = "Article modifié";
+			if (await _articleBusiness.Update(article))
+			{
+				TempData["Message"] = "Article modifié";
+			}
+			else
+			{
+				TempData["Message"] = "Article non modifié";
+			}
 			return RedirectToAction("Read", new { id = article.Id });
 		}
 		public async Task<IActionResult> Delete(int id)
 		{
-			await _articleBusiness.Delete(id);
-			TempData["Message"] = "Article modifié";
+			if (await _articleBusiness.Delete(id))
+			{
+				TempData["Message"] = "Article supprimé";
+			}else
+			{
+				TempData["Message"] = "Article non supprimé";
+			}	
 			return RedirectToAction("AllArticles");
 		}
 
@@ -87,6 +104,11 @@ namespace WikY.Controllers
 			}
 
 			return Json(res);
+		}
+
+		public async Task<IActionResult> SearchAjax(string str)
+		{
+			return PartialView("_displayArticlesPartial", await _articleBusiness.Search(str));
 		}
 	}
 }

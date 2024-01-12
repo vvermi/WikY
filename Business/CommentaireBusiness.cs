@@ -18,10 +18,10 @@ namespace Business
 			_commentaireRepository = CommentaireRepository;
 
 		}
-		public async Task<List<Commentaire>> GetCommentaires()
+		public async Task<List<Commentaire>> AllCommentaires()
 		{
 
-			return await _commentaireRepository.GetCommentaires();
+			return await _commentaireRepository.AllCommentaires();
 		}
 
 		public async Task<bool> Create(Commentaire commentaire)

@@ -1,0 +1,11 @@
+﻿@model Commentaire
+
+<form asp-action="Update">
+    <input asp-for="Id" type="hidden" />
+    <label>Auteur :</label>
+    <input asp-for="Auteur" type="text" placeholder="@Model.Auteur"/>
+    <label>Contenu :</label>
+    <input asp-for="Contenu" type="text" placeholder="@Model.Contenu"/>
+
+    <button>Modifier</button>
+</form>

@@ -12,7 +12,7 @@ namespace Repositories
 		{
 			_context = context;
 		}
-		public async Task<List<Commentaire>> GetCommentaires()
+		public async Task<List<Commentaire>> AllCommentaires()
 		{
 			return await _context.Commentaires.ToListAsync();
 		}

@@ -9,10 +9,10 @@ namespace Business.Contracts
 {
 	public interface ICommentaireBusiness
 	{
-		public Task<List<Commentaire>> GetCommentaires();
-		public Task<bool> Create(Commentaire article);
+		public Task<List<Commentaire>> AllCommentaires();
+		public Task<bool> Create(Commentaire commentaire);
 		public Task<Commentaire> Read(int id);
-		public Task<bool> Update(Commentaire article);
+		public Task<bool> Update(Commentaire commentaire);
 		public Task<bool> Delete(int id);
 	}
 }

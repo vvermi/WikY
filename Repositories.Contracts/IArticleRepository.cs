@@ -13,7 +13,7 @@ namespace Repositories.Contracts
 
 
 
-		Task<List<Article>> Search(string name);
+		Task<List<Article>> Search(string str);
 
 		Task<List<Article>> GetAllAsync();
 

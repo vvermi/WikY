@@ -1,10 +1,34 @@
 ﻿@model Article
 
-<h1>@Model.Id</h1>
-<h2>@Model.Auteur</h2>
-<h2>@Model.Contenu</h2>
-<h2>@Model.DateCre</h2>
-<h2>@Model.DateMod</h2>
+
+<table class="table table-striped table-sm table-bordered text-center">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Theme</th>
+			<th>Auteur</th>
+			<th>Contenu</th>
+			<th>DateCre</th>
+			<th>DateMod</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>@Model.Id</td>
+			<td>@Model.Theme</td>
+			<td>@Model.Auteur</td>
+			<td>@Model.Contenu</td>
+			<td>@Model.DateCre</td>
+			<td>@Model.DateMod</td>
+		</tr>
+
+
+	</tbody>
+
+
+
+</table>
 
 <a asp-action="Update" asp-route-id="@Model.Id">Modifier</a>
 <a asp-action="Delete" asp-route-id="@Model.Id" onclick="return confirm('Sûr Article ???');">Supprimer</a>
@@ -15,3 +39,45 @@
 
 <br />
 <a asp-controller="Commentaire" asp-action="Create" asp-route-articleid="@Model.Id">Ajouter Commentaire</a>
+
+<br/>
+<br/>
+<hr/>
+
+<partial name="_formCommentairePartial" model="new Commentaire(){ArticleId = Model.Id}" />
+
+
+
+<form id="formAdd">
+	<input id="ArticleId" value="@Model.Id" type="hidden" />
+	<label>Auteur :</label>
+	<input  id="Auteur" type="text" />
+	<label>Contenu :</label>
+	<input id="Contenu" type="text"  />
+
+	<button>Ajouter Ajax</button>
+
+</form>
+
+
+<script>
+
+
+	$(function () {
+		$('#formAdd').submit(function (e) {
+			$.post('/Commentaire/CreAjax', { ArticleId: $('#ArticleId').val(), Auteur: $('#Auteur').val(), Contenu: $('#Contenu').val() }, function (data) {
+
+				alert(data);
+
+
+				$('#divContentMessages').html(data);
+			});
+
+			e.preventDefault();
+		});
+
+	})
+
+
+</script>
+
