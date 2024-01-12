@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Business.Contracts;
+using Business;
+using Entities;
 
 namespace WikY.Controllers
 {
@@ -17,7 +19,21 @@ namespace WikY.Controllers
 		{
 			return View();
 		}
+		public IActionResult Create(int articleId)
+		{	
+			ViewBag.articleId = articleId;
+			return View();
+		}
 
+		[HttpPost]
+		public async Task<IActionResult> Create(Commentaire commentaire)
+		{
+			await _commentaireBusiness.Create(commentaire);
+			TempData["Message"] = "Commentaire créé";
+
+			//return RedirectToAction("Read", new { id = article.Id });
+			return RedirectToAction("Read", "Article", new { id = commentaire.ArticleId });
+		}
 		public async Task<IActionResult> Delete(int id)
 		{
 			//back to détail Article

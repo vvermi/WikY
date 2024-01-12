@@ -1,0 +1,44 @@
+﻿@model Commentaire
+
+@{
+	ViewData["Title"] = "Create Commentaire (avec Contraintes)";
+}
+
+@section Scripts
+{
+	<partial name="_ValidationScriptsPartial" />
+}
+
+<h1>@ViewData["Title"] pour article @ViewBag.articleId</h1>
+
+<form asp-action="Create" asp-route-id="">
+	<br />
+	<div>
+		<input asp-for="ArticleId" value="@ViewBag.articleId" type="hidden" />
+		
+
+	</div>
+	<br />
+		<div>
+
+		<label asp-for="Auteur">Auteur :</label>
+		<input asp-for="Auteur" />
+		<span asp-validation-for="Auteur"></span>
+		<div id="divContentMessageAuteur"></div>
+
+	</div>
+	<br />
+	<div>
+		<label asp-for="Contenu">Contenu :</label>
+		<input asp-for="Contenu" />
+		<span asp-validation-for="Contenu"></span>
+
+	</div>
+	<br />
+	<div asp-validation-summary="All"></div>
+	<br />
+	<button>Valider</button>
+
+</form>
+
+</script>

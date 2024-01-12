@@ -31,7 +31,7 @@ namespace WikY.Controllers
 		}
 
 		public async Task<IActionResult> AllArticles()
-		{			
+		{
 			return View(await _articleBusiness.GetArticles());
 		}
 
@@ -48,7 +48,6 @@ namespace WikY.Controllers
 
 			//return RedirectToAction("Read", new { id = article.Id });
 			return RedirectToAction("ReadAll");
-
 		}
 
 		public async Task<IActionResult> Read(int id)
@@ -57,7 +56,6 @@ namespace WikY.Controllers
 			if (article == null) return NotFound();
 			return View(article);
 		}
-
 
 		public async Task<IActionResult> Update(int id)
 		{
