@@ -10,11 +10,9 @@ namespace Business.Contracts
     public interface IArticleBusiness
     {
 		public Task<List<Article>> GetArticles();
-		public void Create(string Theme, string Auteur, string Contenu);
-		public void Create(Article article);
-		public Article Read(int id);
-        
-        public void Update(Article article);
-        public void Delete(int id);
+		public Task Create(Article article);
+		public Task<Article> Read(int id);
+        public Task Update(Article article);
+        public Task Delete(int id);
     }
 }

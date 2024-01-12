@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Entities;
-using Business;
-using Repositories;
 using Business.Contracts;
 
 
@@ -26,25 +24,24 @@ namespace WikY.Controllers
 		}
 
 		public IActionResult Index()
-        {
-            return View();
-        }
-
-		public IActionResult AllArticles()
 		{
-			return View(_articleBusiness.GetArticles().Result);
+			return View();
+		}
+
+		public async Task<IActionResult> AllArticles()
+		{
+			return View(await _articleBusiness.GetArticles());
 		}
 
 		public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-		public IActionResult Create(Article article)
 		{
-			_articleBusiness.Create(article);
+			return View();
+		}
 
+		[HttpPost]
+		public async Task<IActionResult> Create(Article article)
+		{
+			await _articleBusiness.Create(article);
 			TempData["Message"] = "Article créé";
 
 			//return RedirectToAction("Read", new { id = article.Id });
@@ -52,29 +49,28 @@ namespace WikY.Controllers
 
 		}
 
-		public IActionResult Read(int id) {
-
-            var article = _articleBusiness.Read(id);
-            if (article == null) return NotFound();
-            return View(article); }
-
-		
-		public IActionResult Update(int id)
+		public async Task<IActionResult> Read(int id)
 		{
-			var article = _articleBusiness.Read(id);
+			var article = await _articleBusiness.Read(id);
+			if (article == null) return NotFound();
 			return View(article);
 		}
-		[HttpPost]
-		public IActionResult Update(Article article)
-		{
-			_articleBusiness.Update(article);
 
+
+		public async Task<IActionResult> Update(int id)
+		{
+			return View(await _articleBusiness.Read(id));
+		}
+		[HttpPost]
+		public async Task<IActionResult> Update(Article article)
+		{
+			await _articleBusiness.Update(article);
 			TempData["Message"] = "Article modifié";
 			return RedirectToAction("Read", new { id = article.Id });
 		}
-		public IActionResult Delete(int id) 
+		public async Task<IActionResult> Delete(int id)
 		{
-			_articleBusiness.Delete(id);
+			await _articleBusiness.Delete(id);
 			TempData["Message"] = "Article modifié";
 			return RedirectToAction("AllArticles");
 		}
