@@ -1,13 +1,21 @@
 ﻿@model Article
 
 <form asp-action="Update">
+    <div>
     <input asp-for="Id" type="hidden" />
+    </div>
+    <div>
     <label>Theme :</label>
     <input asp-for="Theme" type="text"/>
+    </div>
+    <div>
     <label>Auteur :</label>
     <input asp-for="Auteur" type="text" />
+    </div>
+    <div>
     <label>Contenu :</label>
     <input asp-for="Contenu" type="text" />
+    </div>
     
     <button>Modifier</button>
 </form>
