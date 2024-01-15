@@ -1,32 +1,66 @@
 ﻿@model List<Commentaire>
 
-<table class="table table-striped table-sm table-bordered text-center">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Auteur</th>
-            <th>Contenu</th>
-            <th>DateCre</th>
-            <th>DateMod</th>
-        </tr>
-    </thead>
-    <tbody id="contentMessage">
-        @foreach (var commentaire in Model)
-        {
-            <tr>
-                <td>@commentaire.Id</td>
-                <td>@commentaire.Auteur</td>
-                <td>@commentaire.Contenu</td>
-                <td>@commentaire.DateCre</td>
-                <td>@commentaire.DateMod</td>
+<div id="divContentMessages">
+	<p class="text-success">@TempData["Message"] </p>
+<table  class="table table-striped table-sm table-bordered text-center">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>Auteur</th>
+			<th>Contenu</th>
+			<th>DateCre</th>
+			<th>DateMod</th>
+		</tr>
+	</thead>
+	<tbody id="contentMessage">
+		@foreach (var commentaire in Model)
+		{
+			<tr>
+				<td>@commentaire.Id</td>
+				<td>@commentaire.Auteur</td>
+				<td>@commentaire.Contenu</td>
+				<td>@commentaire.DateCre</td>
+				<td>@commentaire.DateMod</td>
+				<td>
+					<a asp-controller="Commentaire" asp-action="Read" asp-route-id="@commentaire.Id">Detail</a>
+				</td>
+				<td>
+					<a asp-controller="Commentaire" asp-action="Delete" asp-route-id="@commentaire.Id">Supprimer</a>
+				</td>
+				<td>
+					<button onclick="SupprimerFullAjax(this)">DelFullAjax</button>
+				</td>
 
-                <td>
-                    <a asp-controller="Commentaire" asp-action="Read" asp-route-id="@commentaire.Id">Detail</a>
-                </td>
-                <td>
-                    <a asp-controller="Commentaire" asp-action="Delete" asp-route-id="@commentaire.Id">Supprimer</a>
-                </td>
-            </tr>
-        }
-    </tbody>
+				<td>
+					<button onclick="SupprimerAspAjax(@commentaire.Id)">DelAspAjax</button>
+				</td>
+
+			</tr>
+		}
+	</tbody>
 </table>
+</div>
+
+<script>
+
+	function SupprimerFullAjax(commentaire) {
+
+		var row = commentaire.parentNode.parentNode;
+		var commentaireId = row.cells[0].innerText;
+
+		$.post('/Commentaire/DeleteFullAjax', { commentaireId: commentaireId }, function (isDelete) {
+			if (isDelete == true)
+				row.parentNode.removeChild(row);
+		});
+	}
+
+	function SupprimerAspAjax(commentaireId) {
+
+		$.post('/Commentaire/DeleteAspAjax', { commentaireId: commentaireId }, function (data) {
+				$('#divContentMessages').html(data);
+		});
+	}
+
+
+</script>
+

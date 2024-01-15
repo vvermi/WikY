@@ -38,6 +38,7 @@ namespace Repositories
 			try
 			{
 				var articleToEdit = await _context.Articles.FirstOrDefaultAsync(a => a.Id == article.Id);
+				articleToEdit.Theme = article.Theme;
 				articleToEdit.Auteur = article.Auteur;
 				articleToEdit.Contenu = article.Contenu;
 				articleToEdit.DateMod = DateTime.Now;

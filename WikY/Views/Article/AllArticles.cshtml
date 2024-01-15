@@ -31,7 +31,7 @@
 		$('#formSearch').submit(function (e) {
 			$.post('/Article/SearchAjax', { str: $('#searchStr').val() }, function (data) {
 				
-				alert(data);
+				// alert(data);
 				
 				
 				$('#divContentMessages').html(data);

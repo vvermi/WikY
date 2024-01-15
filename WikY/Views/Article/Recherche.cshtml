@@ -1,0 +1,39 @@
+﻿@model List<Article>
+
+<h1>Recherche</h1>
+
+
+<div>
+    Recherche en ajax
+    <form id="formSearch">
+        <input name="str" id="searchStr" placeholder="Truc..." />
+        <button>Rechercher</button>
+    </form>
+</div>
+
+<
+<div id="divContentMessages">
+    <partial name="_SearchArticlesPartial" model="Model" />
+</div>
+
+
+
+<script>
+
+    $(function () {
+        $('#formSearch').submit(function (e) {
+            $.post('/Article/RechercheAjax', { str: $('#searchStr').val() }, function (data) {
+
+                alert(data);
+
+
+                $('#divContentMessages').html(data);
+            });
+
+            e.preventDefault();
+        });
+
+    })
+
+</script>
+
